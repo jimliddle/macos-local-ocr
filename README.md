@@ -1,7 +1,7 @@
 # macos-local-ocr
 
-Extract text from screenshots and scans on your Mac. Apple Vision runs first;
-Tesseract takes over if it fails or returns no text. Use the command-line tool
+Extract text from screenshots and scans on your Mac. Apple Vision runs first and
+Tesseract takes over if it fails or returns no text. Use the command line tool
 directly or load it as an agent skill.
 
 This uses Apple's Vision OCR framework, not Apple Intelligence or a language
@@ -65,8 +65,8 @@ python3 scripts/ocr.py "/path/to/image.png" --timeout 45
 ```
 
 Auto mode gives Vision at most 15 seconds, then Tesseract gets the remaining
-budget. Build time is separate. There is no retry based on confidence or text
-content. Nonempty recognition can still be wrong.
+budget, build time is separate. There is no retry based on confidence or text
+content and nonempty recognition can still be wrong.
 
 ## Use as a skill
 
@@ -82,15 +82,15 @@ Example request:
 > the text as recognized and tell me if Tesseract was used.
 
 Discovery and invocation syntax depend on the agent. This package does not
-install an MCP server or modify agent settings. Client-specific loading has not
+install an MCP server or modify agent settings. Client specific loading has not
 yet been tested for this standalone package.
 
 ## Behaviour and limits
 
 - PNG and JPEG input only, up to 24 MiB per file. PDFs must be rendered separately.
 - Vision uses accurate English recognition with language correction disabled.
-  This avoids that correction pass; it does not guarantee exact transcription.
-- The Vision helper rejects multi-image files and images over 32 million pixels.
+  This avoids that correction pass, it does not guarantee exact transcription.
+- The Vision helper rejects multi image files and images over 32 million pixels.
   Those are helper checks, not shared Tesseract limits.
 - Tesseract uses its installed English data and default segmentation. Its output
   can differ from Vision, including whitespace and reading order.
